@@ -17,6 +17,9 @@ function AddPost({setShouldUpdate}) {
 
   const post = (e) => {
     e.preventDefault()
+    if(!text && !image){
+    return alert('Please Add Some Texts Or Images')
+    }
 
     const formData = new FormData()
     formData.append('text',text)
@@ -39,7 +42,7 @@ function AddPost({setShouldUpdate}) {
     <form className='addPost' onSubmit={post}>
       <input placeholder="What's Happening ?" value={text} onChange={(e) => setText(e.target.value)} />
       <div className="post_options">
-        <label htmlFor="myInput">{image?.name ? <CheckIcon sx={{ fontSize: 25, color: "gray" }} className='arrow' /> : <BrokenImageOutlinedIcon sx={{ fontSize: 25, color: "gray" }} className='arrow' /> }</label>
+        <label htmlFor="myInput">{image?.name ? <CheckIcon sx={{ fontSize: 25, color: "rgb(90, 90, 255)" }} className='arrow' /> : <BrokenImageOutlinedIcon sx={{ fontSize: 25, color: "rgb(90, 90, 255)" }} className='arrow' /> }</label>
         <input
           id="myInput"
           style={{ display: 'none' }}

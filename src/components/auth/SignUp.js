@@ -20,7 +20,7 @@ function SignUp() {
         alert(res.message)
       }else{
         alert(res.message)
-        navigate('/login')
+        navigate('/')
       }
     }).catch(err=>console.log(err))
   }

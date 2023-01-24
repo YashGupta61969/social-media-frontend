@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import './post.css'
-import Comments from '../Comments'
+import Comments from '../comment/Comments'
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
@@ -15,7 +15,7 @@ function Post({ post, setShouldUpdate }) {
     const [updatedImage, setUpdatedImage] = useState(post.image ? post.image : '')
     const [postOptionsVisible, setPostOptionsVisible] = useState(false)
     const [editing, setEditing] = useState(false)
-
+    
     const deletePost = () => {
         fetch(`http://127.0.0.1:8000/posts/${post.id}`, {
             method: 'DELETE',
@@ -24,8 +24,21 @@ function Post({ post, setShouldUpdate }) {
                 'Content-Type': "application/json",
             },
         }).then(res => res.json()).then(res => {
-            alert('Post Deleted Successfully')
-            setShouldUpdate(prev => !prev)
+            const name = post.image.split('\\')[1]
+
+            fetch(`http://127.0.0.1:8000/posts/image/${name}`, {
+                method: 'DELETE',
+                headers: {
+                    'Authorization': `Bearer ${user.token}`,
+                    'Content-Type': "application/json",
+                },
+            }).then((res)=>{
+                alert('Post Deleted Successfully')
+                setShouldUpdate(prev => !prev)
+            }).catch(err=>{
+                console.log(err)
+            })
+
         }).catch(err => console.log(err))
     }
 
@@ -68,7 +81,7 @@ function Post({ post, setShouldUpdate }) {
             </div>}
 
             <div className="postDesc">
-                <div>
+                <div className='captionContainer'>
                     <span className='userName'>{post.user.email} :-</span>
                     {!editing ? <span className='caption'>{post.text}</span> : <input className='captionInput' type='text' value={updatedText} onChange={(e) => setUpdatedText(e.target.value)} />}
                 </div>

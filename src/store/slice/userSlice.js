@@ -12,6 +12,7 @@ const userSlice = createSlice({
             state.user = payload
         },
         logout:(state)=>{
+            localStorage.clear()
             state.user = {token:null}
         }
     }

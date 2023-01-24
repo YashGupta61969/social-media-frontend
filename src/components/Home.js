@@ -1,11 +1,13 @@
 import React, { useEffect } from 'react'
 import { useState } from 'react'
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { logout } from '../store/slice/userSlice';
 import AddPost from './AddPost'
 import './home.css'
 import Post from './post/Post';
 
 function Home() {
+  const dispatch = useDispatch()
   const [posts, setPosts] = useState([])
   const [shouldUpdate, setShouldUpdate] = useState(false)
   const {user} = useSelector(state=>state.user)
@@ -24,6 +26,9 @@ function Home() {
   
   return (
     <div className='home'>
+    <div className='logoutBTN' onClick={()=>dispatch(logout())}>
+      <h2>Log Out</h2>
+    </div>
 
       <AddPost setShouldUpdate={setShouldUpdate}/>
 

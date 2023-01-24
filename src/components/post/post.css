@@ -41,14 +41,15 @@
 }
 
 .userName{
-    font-weight: 600;
-    margin-left: 1rem;
+    margin-bottom: 1rem;
+    font-weight: 800;
 }
 
 .postDropdown {
     position: absolute;
     border: 1px solid #a0a0a0;
     border-radius: 5px;
+    z-index: 200;
     display: flex;
     flex-direction: column;
     background: white;
@@ -72,6 +73,10 @@
     display: flex;
     align-items: center;
     font-size: 1.4rem;
+}
+
+.captionContainer{
+    padding-left: 2rem;
 }
 
 .captionInput{

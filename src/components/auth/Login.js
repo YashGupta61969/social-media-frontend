@@ -24,6 +24,7 @@ function Login() {
       if(res.status === 'error'){
         alert(res.message)
       }else{
+        localStorage.setItem('user',JSON.stringify(res))
         dispatch(login(res))
       }
     } ).catch(err => console.error(err))
